@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/boardrun; #MVCC=TRUE #MVCC쓰면, 여러개가 한번에 접근했을 때 빠르게 처리할 수 있게 해준다고 한다.
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create #애플리케이션이 실행 시점에, 가지고 있는 테이블을 다 지우고, 엔터티 정보를 보고 다시 생성
+    properties:
+      hibernate:
+        #        show_sql: true #이걸 쓰면 로그를 쓰는게 아닌, system.out.print를 통해서 출력해서 별로 사용하지 않는다.
+        format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug # 하이버네이트 SQL을 디버그 모드로 쓰겠다는 뜻
+    org.hibernate.type: trace

@@ -1,0 +1,168 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+
+	<style type="text/css">
+		a {
+			text-decoration: none
+		}
+
+		a:link {
+			color: black
+		}
+
+		a:visited {
+			color: black
+		}
+
+		a:hover {
+			color: blue
+		}
+
+		.main-box {
+			padding: 10px;
+			font-size: 40px;
+			font-family: "Britannic";
+			text-align: center;
+			background-color: #D1E0CF;
+		}
+
+		.medium {
+			padding-top: 20px;
+			height: 60%;
+		}
+
+		.bottom {
+			padding-right: 100px;
+		}
+
+		.start-button {
+			float: right;
+			width: 100px;
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
+			font-family: 'Do Hyeon', sans-serif;
+			font-size: 25px;
+			background-color: #D1E0CF;
+		}
+
+		.left-box {
+			margin-left: 20px;
+			width: 30%;
+			height: 400px;
+			float: left;
+		}
+
+		.left-box-one {
+			width:100%;
+			height: 80%;
+		}
+
+		.left-box-two {
+			padding-top: 10px;
+			text-align: center;
+			width: 100%;
+			height: 20%;
+		}
+
+		.right-box {
+			margin-left: 50px;
+			width: 50%;
+			height: 200px;
+			float: left;
+		}
+
+
+		.right-box-one {
+			width: 100%;
+			height: 50px;
+		}
+
+		.right-box-two {
+			margin-top: 100px;
+			width: 100%;
+			height: 50px;
+		}
+
+.f0{
+	font-size: 3vw;
+			font-family: 'Do Hyeon', sans-serif;
+			font-weight: bolder;
+			color:#D1E0CF;
+
+}
+
+		.f1 {
+			font-size: 3vw;
+			font-family: 'Do Hyeon', sans-serif;
+			font-weight: bolder;
+		}
+
+		.f2 {
+			font-size: 1.5vw;
+			font-family: 'Noto Sans KR', sans-serif;
+			line-height: 200%;
+		}
+
+		img {
+			width: 100%;
+			height: 100%;
+			display: block;
+			margin: 0px auto;
+		}
+	</style>
+
+
+</head>
+
+
+
+<body>
+
+	<div class="main-box">
+		Board Run
+	</div>
+	<div class="medium">
+		<div class="left-box">
+			<div class="left-box-one">
+				<img src="/img/scooter.png"
+					alt="scooter">
+			</div>
+			<div class="left-box-two"><font class="f0">
+				2021 capstone</font>
+			</div>
+		</div>
+
+		<div class="right-box">
+			<div class="right-box-one">
+				<font class="f1">
+					객체추적기법을 활용한<br>
+					전동 스쿠터 다중 탑승 행위 탐지 시스템
+				</font>
+			</div>
+			<div class="right-box-two">
+				<font class="f2">
+					본 프로젝트는 전동 스쿠터 탑승자의 영상에서<br>
+					YOLOv4와 DeepSORT를 활용하여<br> 객체를 실시간 추적, 탐지하고<br>
+					직접 개발한 알고리즘을 적용시켜<br>
+					다중 탑승 행위를 탐지하는 시스템을 개발하였다.
+				</font>
+			</div>
+		</div>
+	</div>
+	<div class="bottom">
+		<div class="start-button">
+			<a href="/uploadvideo">시작하기</a>
+		</div>
+	</div>
+
+</body>
+
+</html>
