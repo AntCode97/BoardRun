@@ -21,7 +21,7 @@ OPENCV 4.5.2
 
 ```bash
 git clone https://github.com/AntCode97/BoardRun.git
-cd BoardRun
+cd AutoDetect-main
 ```
 
 ## step 2. Prepare Customized Weight File
@@ -33,7 +33,7 @@ https://github.com/AntCode97/Boardrun_weights
 다운로드 한 weight 파일을 이용해서, 텐서플로우 모델을 만든다.
 
 ```bash
-python save_model.py --weights ./data/MRD.weights --output ./checkpoints/mrd-416 --model yolov4 --tiny
+python save_model.py --weights ./data/MRD.weights --output ./checkpoints/mrd-416 --model yolov4
 ```
 
 ## Step 3. Prepare Video File for Detecting Violation
@@ -47,13 +47,7 @@ python save_model.py --weights ./data/MRD.weights --output ./checkpoints/mrd-416
 python (다중 객체 탐지 python file) --weight (mrd weight file) --model (YOLO version) --video (다중 객체를 탐지하고자 하는 영상) --output (실행 결과를 저장할 위치와 파일 이름 지정)
 
 ```bash
-python detect_violation.py --weight ./checkpoints/mrd-416 --model yolov4 --video ./data/video/test.mp4 --output ./outputs/result.avi 
-```
-
-weight file을 tiny로 사용할 시 --tiny 를 추가하여 실행한다.
-
-```bash
-python detect_violation.py --weights ./checkpoints/mrd-416 --model yolov4 --video ./data/video/test.mp4 --output ./outputs/result.avi --tiny True
+python detect_violation.py --weight ./checkpoints/mrd-416 --model yolov4 --video ./data/video/test.mp4 --output ./outputs/result.avi
 ```
 
 ## Step 5. Check the Result
