@@ -3,6 +3,8 @@ import os
 from collections import defaultdict
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import time
+import os
+import datetime
 import tensorflow as tf
 physical_devices = tf.config.experimental.list_physical_devices('GPU')
 if len(physical_devices) > 0:
@@ -36,6 +38,7 @@ class Detector(object):
     not_ridecount = defaultdict(list)
     rider_time = defaultdict(list)
     old_riders = []
+    save_cnt = defaultdict(list)
 
     def init(self, Flags):
         # Definition of the parameters
@@ -331,14 +334,6 @@ class Detector(object):
                     print("Tracker ID: {}, Class: {},  BBox Coords (xmin, ymin, xmax, ymax): {}".format(
                         str(track.track_id), class_name, (int(bbox[0]), int(bbox[1]), int(bbox[2]), int(bbox[3]))))
 
-            for r in self.riders:
-                if len(self.riders[r]) >= 2:
-                    ids = []
-                    for p in self.riders[r]:
-                        ids.append(p.track_id)
-                    print("위법 행위 감지!! (2명 이상 탑승)!!", "스쿠터 ID: ", r.track_id, "탑승자 ID: ", ids)
-
-
             # calculate frames per second of running detections
             fps = 1.0 / (time.time() - start_time)
             print("FPS: %.2f" % fps)
@@ -347,6 +342,22 @@ class Detector(object):
 
             if not FLAGS.dont_show:
                 cv2.imshow("Output Video", result)
+
+
+            for r in self.riders:
+                if len(self.riders[r]) >= 2:
+                    if FLAGS.save_image:
+                        if not self.save_cnt[r]:
+                            # 만든시간을 타임 스탬프로 출력
+                            ctime = os.path.getctime(self.video_path)
+                            file_name = str(ctime+now_time)
+                            print(file_name)
+                            cv2.imwrite(f'./output/images/{file_name}.png', result)
+                            self.save_cnt[r] = True
+                    ids = []
+                    for p in self.riders[r]:
+                        ids.append(p.track_id)
+                    print("위법 행위 감지!! (2명 이상 탑승)!!", "스쿠터 ID: ", r.track_id, "탑승자 ID: ", ids)
 
             # if output flag is set, save video file
             if FLAGS.output:

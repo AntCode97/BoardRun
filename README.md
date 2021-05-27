@@ -20,17 +20,21 @@ OPENCV 4.5.2
 컴퓨터에 Git clone 명령어를 이용해서 Repository를 다운받는다.
 
 ```bash
-git clone (링크)
-cd (폴더)
+git clone https://github.com/AntCode97/BoardRun.git
+cd BoardRun
 ```
 
 ## step 2. Prepare Customized Weight File
 
 사람과 전동 스쿠터를 탐지하기 위해 미리 학습시켜놓은 Weight File을 준비한다.
 
-(다운로드 링크)
+https://github.com/AntCode97/Boardrun_weights
 
-다운로드 한 후 checkpoints 디렉토리로 이동시킨다.
+다운로드 한 weight 파일을 이용해서, 텐서플로우 모델을 만든다.
+
+```bash
+python save_model.py --weights ./data/MRD.weights --output ./checkpoints/mrd-416 --model yolov4 --tiny
+```
 
 ## Step 3. Prepare Video File for Detecting Violation
 
@@ -40,10 +44,10 @@ cd (폴더)
 
 명령 프롬프트 창에서 다음 명령어를 통해 프로그램 실행한다.
 
-python (다중 객체 탐지 python file) --weight (YOLO weight file) --model (YOLO version) --video (다중 객체를 탐지하고자 하는 영상) --output (실행 결과를 저장할 위치와 파일 이름 지정)
+python (다중 객체 탐지 python file) --weight (mrd weight file) --model (YOLO version) --video (다중 객체를 탐지하고자 하는 영상) --output (실행 결과를 저장할 위치와 파일 이름 지정)
 
 ```bash
-python detect_violation.py --weight ./checkpoints/yolov4-416 --model yolov4 --video ./data/side_1.avi --output ./outputs/result.avi 
+python detect_violation.py --weight ./checkpoints/mrd-416 --model yolov4 --video ./data/test.mp4 --output ./outputs/result.avi 
 ```
 
 weight file을 tiny로 사용할 시 --tiny 를 추가하여 실행한다.
