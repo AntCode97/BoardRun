@@ -76,11 +76,11 @@ class Detector(object):
         # get video ready to save locally if flag is set
         if FLAGS.output:
             # by default VideoCapture returns float instead of int
-            width = int(self.vid.get(cv2.CAP_PROP_FRAME_WIDTH))
-            height = int(self.vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
-            fps = int(self.vid.get(cv2.CAP_PROP_FPS))
-            codec = cv2.VideoWriter_fourcc(*FLAGS.output_format)
-            out = cv2.VideoWriter(FLAGS.output, codec, fps, (width, height))
+            self.width = int(self.vid.get(cv2.CAP_PROP_FRAME_WIDTH))
+            self.height = int(self.vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
+            self.fps = int(self.vid.get(cv2.CAP_PROP_FPS))
+            self.codec = cv2.VideoWriter_fourcc(*FLAGS.output_format)
+            self.out = cv2.VideoWriter(FLAGS.output, self.codec, self.fps, (self.width, self.height))
 
     # 인식된 사람과 전동스쿠터들 중에서, 좌표상으로 봤을 때 탑승중으로 판단되는 지와 사람이 탑승 중인스쿠터 객체를 리턴
     def isRide(self, scooter_list, person):
@@ -352,7 +352,7 @@ class Detector(object):
                             ctime = os.path.getctime(self.video_path)
                             file_name = str(ctime+now_time)
                             print(file_name)
-                            cv2.imwrite(f'./output/images/{file_name}.png', result)
+                            cv2.imwrite(f'./outputs/images/{file_name}.png', result)
                             self.save_cnt[r] = True
                     ids = []
                     for p in self.riders[r]:
