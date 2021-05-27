@@ -21,7 +21,7 @@ OPENCV 4.5.2
 
 ```bash
 git clone https://github.com/AntCode97/BoardRun.git
-cd AutoDetect-main
+cd BoardRun
 ```
 
 ## step 2. Prepare Customized Weight File
