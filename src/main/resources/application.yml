@@ -12,6 +12,10 @@ spring:
       hibernate:
         #        show_sql: true #이걸 쓰면 로그를 쓰는게 아닌, system.out.print를 통해서 출력해서 별로 사용하지 않는다.
         format_sql: true
+  servlet:
+    multipart:
+      max-file-size: 102400KB
+      max-request-size: 102400KB
 
 logging:
   level:

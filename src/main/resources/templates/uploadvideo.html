@@ -1,4 +1,4 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -52,8 +52,9 @@
             line-height: 50px;
             text-align: center;
             font-family: 'Do Hyeon', sans-serif;
-            font-size: 23px;
+            font-size: 15px;
             background-color: #D1E0CF;
+            display: inline-block;
         }
 
         .detect-button {
@@ -66,26 +67,73 @@
             font-size: 23px;
             background-color: #D1E0CF;
         }
+
+        /*.filebox label {*/
+        /*    display: inline-block;*/
+        /*    padding: .5em .75em;*/
+        /*    color: #999;*/
+        /*    font-size: inherit;*/
+        /*    line-height: normal;*/
+        /*    vertical-align: middle;*/
+        /*    background-color: #000000;*/
+        /*    cursor: pointer;*/
+        /*    border: 1px solid #ebebeb;*/
+        /*    border-bottom-color: #e2e2e2;*/
+        /*    border-radius: .25em;*/
+        /*}*/
+
+
     </style>
 
 </head>
 
 <body>
-    <div class="main-box">
-        <a href="main.html">Board Run</a> 
-    </div>
-    <div class="thumbnail">
+<div class="main-box">
+    <a href="main.html">Board Run</a>
+</div>
+<div class="thumbnail">
 
+</div>
+<!--<form role="form" action="/videoList" th:object="${videoForm}" class="bottom" method="post" enctype="multipart/form-data" ...>-->
+<!--    <div >-->
+<!--        <input th:field="*{fileUrl}" class="upload-button"  id="video_file" type="file" name="files" accept="video/*">-->
+<form role="form" action="/uploadvideo" class="bottom" method="post" enctype="multipart/form-data" ...>
+    <div >
+        <input class="upload-button"  id="video_file" type="file" name="file" accept="video/*">
     </div>
-    <div class="bottom">
-        <button class="upload-button">
-            동영상 업로드하기
-        </button>
-        <button class="detect-button">
-            다중탑승행위 검출
-        </button>
-    </div>
+    <button type="submit" class="detect-button">
+        Upload
+    </button>
+    <button class="detect-button">
+        <a href="/videoList"> 다중 탑승 행위 검출 </a>
+    </button>
+</form>
+<div>
+    <ul>
+        <li th:each="file : ${files}">
+            <a th:href="${file}" th:text="${file}" />
+        </li>
+    </ul>
+</div>
 
+<!--<script th:inline="javascript"> $(document).ready(function () {-->
+<!--    var fileTarget = $('.filebox .upload-hidden');-->
+<!--    fileTarget.on('change', function () {-->
+<!--        // 값이 변경되면-->
+<!--        if (window.FileReader) {-->
+<!--            // modern browser-->
+<!--            var filename = $(this)[0].files[0].name;-->
+<!--        } else {-->
+<!--            // old IE-->
+<!--            var filename = $(this).val().split('/').pop().split('\\').pop();-->
+<!--            // 파일명만 추출-->
+<!--        }-->
+<!--        // 추출한 파일명 삽입-->
+<!--        $(this).siblings('.upload-name').val(filename);-->
+<!--    });-->
+<!--});-->
+
+<!--</script>-->
 
 </body>
 

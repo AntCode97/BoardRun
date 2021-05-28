@@ -18,10 +18,17 @@ public class Video {
     @Column(name = "video_id")
     private Long id;
 
-    private String fileUrl;
+    private String fileName;
+    private String filePath;
 
     private Date createdAt;
 
+
     @OneToMany(mappedBy = "video") //누구에 의해서 매핑되는가,
     private List<VideoImg> videoImgs = new ArrayList<>();
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+        this.filePath="./upload-dir/"+this.getFileName();
+    }
 }

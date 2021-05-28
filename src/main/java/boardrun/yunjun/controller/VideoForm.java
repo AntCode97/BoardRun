@@ -8,7 +8,7 @@ import java.util.Date;
 @Getter @Setter
 public class VideoForm {
 
-    private Date date;
+//    private Date date;
     private String fileUrl;
 
 }
