@@ -18,8 +18,6 @@ boardrun/yunjun/storage/StorageException.java
  boardrun.yunjun.storage.StorageException
 boardrun/yunjun/storage/StorageService.java
  boardrun.yunjun.storage.StorageService
-boardrun/yunjun/service/ThumbnailService.java
- boardrun.yunjun.service.ThumbnailService
 boardrun/yunjun/storage/StorageProperties.java
  boardrun.yunjun.storage.StorageProperties
 boardrun/yunjun/controller/VideoForm.java

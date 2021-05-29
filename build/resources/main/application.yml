@@ -14,8 +14,8 @@ spring:
         format_sql: true
   servlet:
     multipart:
-      max-file-size: 102400KB
-      max-request-size: 102400KB
+      max-file-size: 512000KB
+      max-request-size: 512000KB
       location:
   application:
     name: "boardrun"

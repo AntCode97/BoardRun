@@ -1,6 +1,9 @@
 package boardrun.yunjun.service;
 
+import boardrun.yunjun.domain.Video;
+import boardrun.yunjun.domain.VideoImg;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -10,10 +13,14 @@ import java.util.concurrent.Executors;
 
 @Service
 @Getter @Setter
+@RequiredArgsConstructor
 public class DetectionService {
+    private final VideoService videoService;
 
 
-    public void detect_violation(String filePath){
+    public boolean detect_violation(Video video){
+        String filePath = video.getFilePath();
+        String imageName = filePath.split("/")[2].split("\\.")[0]+".png ";
         try {
             // Linux의 경우는 /bin/bash
             // Process process = Runtime.getRuntime().exec("/bin/bash");
@@ -72,7 +79,7 @@ public class DetectionService {
                     writer.write(input);
 
                     // detect_violation.py 실행
-                    input = "python detect_violation.py --img "+"C:/Users/dnslab_wolf/IdeaProjects/boardrun/detections/"+filePath.split("\\.")[0]+".png " + "--dont_show True --video "+ "C:/Users/dnslab_wolf/IdeaProjects/boardrun/upload-dir/"+ filePath +"\n";
+                    input = "python detect_violation.py --img "+"C:/Users/dnslab_wolf/IdeaProjects/boardrun/detections/"+imageName + "--dont_show True --video "+ "C:/Users/dnslab_wolf/IdeaProjects/boardrun/"+ filePath +"\n";
                     writer.write(input);
 
                     writer.flush();
@@ -86,6 +93,26 @@ public class DetectionService {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+        VideoImg videoImg = new VideoImg();
+        videoImg.setVideo(video);
+
+
+        String imagePath = "./detections/" + imageName;
+        File imageFile = new File(imagePath);
+        while (!imageFile.exists()){
+            //System.out.println(imagePath);
+            continue;
+        }
+        if(imageFile.exists()){
+            videoImg.setFilePath(imagePath);
+            videoImg.setCreatedAt(video.getCreatedAt());
+            videoService.imgSave(videoImg);
+            return false;
+        }
+
+
+        return true;
     }
 
 }

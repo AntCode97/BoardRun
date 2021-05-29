@@ -2,14 +2,15 @@ package boardrun.yunjun.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import boardrun.yunjun.domain.Video;
 import boardrun.yunjun.domain.VideoImg;
 import boardrun.yunjun.service.DetectionService;
-import boardrun.yunjun.service.ThumbnailService;
 import boardrun.yunjun.service.VideoService;
 import boardrun.yunjun.storage.StorageFileNotFoundException;
 import boardrun.yunjun.storage.StorageService;
@@ -17,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +33,7 @@ public class VideoController {
     private final VideoService videoService;
     private final DetectionService detectionService;
     private final StorageService storageService;
+    private boolean wait = true;
     //private ThumbnailService thumbnailService = new ThumbnailService();
 
 
@@ -82,14 +83,16 @@ public class VideoController {
 
     @PostMapping("/uploadvideo")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
-                                   RedirectAttributes redirectAttributes) {
+                                   RedirectAttributes redirectAttributes, @RequestParam("datetime") String datetime) throws ParseException {
 
         storageService.store(file);
         Video video = new Video();
-
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        System.out.println(dateFormat.parse(datetime));
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
         video.setFileName(file.getOriginalFilename());
+        video.setCreatedAt(dateFormat.parse(datetime));
         videoService.upload(video);
         return "redirect:/uploadvideo";
     }
@@ -118,25 +121,28 @@ public class VideoController {
 //        for (File file: files){
 //            files_names.add("/detections/" + file.getName());
 //        }
+
+//
+//        while (this.wait){
+//
+//            model.addAttribute("wait", this.wait);
+//
+//        }
+        model.addAttribute("wait", this.wait);
         List<VideoImg> videoImgs = videoService.findVideoImgs();
-        videoImgs.get(0).getFilePath();
         model.addAttribute("detectionList", videoImgs);
+
 
         return "videoList";
     }
 
     @GetMapping("/detection")
     public String detection(){
+        this.wait = true;
         List<Video> videos = videoService.findVideos();
         Video video = videos.get(videos.size()-1);
-        detectionService.detect_violation(video.getFileName());
-        VideoImg videoImg = new VideoImg();
-        videoImg.setVideo(video);
+        this.wait = detectionService.detect_violation(video);
 
-        String[] imgName = video.getFileName().split("\\.");
-        videoImg.setFilePath("./detections/" + imgName[0] +".png");
-        videoImg.setCreatedAt(video.getCreatedAt());
-        videoService.imgSave(videoImg);
         return  "redirect:/uploadvideo";
     }
 

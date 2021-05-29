@@ -43,7 +43,7 @@ public class VideoService {
             String pattern = "yyyy-MM-dd";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
             formatted = simpleDateFormat.format(new Date(time.toMillis()));
-            video.setCreatedAt(new Date(time.toMillis()));
+            //video.setCreatedAt(new Date(time.toMillis()));
             System.out.println("생성날짜 : " + new Date(time.toMillis()));
             System.out.println("형식지정표현 생성날짜 : " + formatted);
         } catch (IOException e) {

@@ -1,12 +1,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"  http-equiv="refresh" content="5">
+
+
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 	
     <style>
+            a {
+            text-decoration: none
+        }
+
+        a:link {
+            color: black
+        }
+
+        a:visited {
+            color: black
+        }
+
         .main-box {
             padding: 10px;
             font-size: 40px;
@@ -40,6 +54,32 @@
             margin-right: 15px;
             float:left;
         }
+        .wait {
+            width:100%;
+            height:50%;
+
+            border: 2px solid;
+            text-align: center;
+			line-height: 50px;
+            font-size:5vw;
+            font-weight: bolder;
+            font-family:'Noto Sans KR', sans-serif;
+
+        }
+        .wait img{
+            margin:auto;
+
+        }
+<!--        .wait img {-->
+<!--            animation: rotate_img 1s;-->
+<!--            animation-iteration-count: infinite;-->
+<!--        }-->
+<!--        @keyframes rotate_img {-->
+<!--               0% {transform: rotate(0deg);}-->
+<!--            100% {transform: rotate(360deg);}-->
+
+<!--               }-->
+
 
         .one-video, .two-video, .three-video, .four-video, .five-video, .six-video, .seven-video, .eight-video{
             width:100%;
@@ -68,20 +108,30 @@
 </head>
 
 <body>
-    <div class="main-box">
-        Board Run
-    </div>
+            <div class="main-box">
+                <a href="/">
+            Board Run
+                </a>
+
+            </div>
+
     <div class="title">
         전동 스쿠터 다중 탑승 행위 탐지 영상
     </div>
+    <div class="wait" th:if="${wait}">
+        <img src="/img/rotate_300.gif">
+        <div>
+            다중 탑승 행위 검출 중
+        </div>
 
-    <div class="video-first">
+    </div>
+    <div class="video-first" th:unless="${wait}">
         <div class="one"  th:each="detection: ${detectionList}">
 <!--            <li th:each="file : ${files}">-->
 <!--                <a th:href="${file}" th:text="${file}" />-->
 <!--            </li>-->
             <img class="one-video" th:src="${detection.getFilePath()}">
-            <div class="one-name" th:text="${detection.getCreatedAt()}">
+            <div class="one-name" th:text="${#strings.substring(detection.getCreatedAt(),0, 16)}">
             </div>
         </div>
     </div>
