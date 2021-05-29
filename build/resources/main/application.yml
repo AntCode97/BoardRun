@@ -16,6 +16,17 @@ spring:
     multipart:
       max-file-size: 102400KB
       max-request-size: 102400KB
+      location:
+  application:
+    name: "boardrun"
+    profiles:
+      active: local
+
+
+custom:
+  path:
+    upload-images: 'C:/Users/dnslab_wolf/IdeaProjects/boardrun/detections'
+
 
 logging:
   level:

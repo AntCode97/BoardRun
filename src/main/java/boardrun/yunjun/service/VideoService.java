@@ -2,6 +2,7 @@ package boardrun.yunjun.service;
 
 import boardrun.yunjun.domain.Video;
 import boardrun.yunjun.domain.VideoImg;
+import boardrun.yunjun.repository.VideoImgRepository;
 import boardrun.yunjun.repository.VideoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,27 +15,30 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class VideoService {
     private final VideoRepository videoRepository;
-
+    private final VideoImgRepository videoImgRepository;
     public void makeVideoImg(Long videoId) {
         Video video = videoRepository.findOne(videoId);
         VideoImg videoImg = new VideoImg();
         videoImg.setVideo(video);
     }
 
-    //회원 가입
+    //비디오 업로드
     public Long upload(Video video) {
         File file = new File("./upload-dir/"+video.getFileName());
         String formatted = "";
         BasicFileAttributes attrs = null;
+
         FileTime time= null;
         try {
             attrs = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+
             time = attrs.creationTime();
             String pattern = "yyyy-MM-dd";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -51,5 +55,15 @@ public class VideoService {
         return video.getId(); //em에서 persist를 실행하면 영속성으로 엔티티를 저장한다.=> 엔티티를 영구 저장한다
     }
 
+    public void imgSave(VideoImg videoImg){
+        videoImgRepository.save(videoImg);
+    }
+
+    public List<Video> findVideos(){
+        return videoRepository.findAll();
+    }
+    public List<VideoImg> findVideoImgs(){
+        return videoImgRepository.findAll();
+    }
 
 }

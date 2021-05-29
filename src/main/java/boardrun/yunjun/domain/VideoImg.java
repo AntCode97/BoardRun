@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "videoimgs")
@@ -16,7 +17,9 @@ public class VideoImg {
     @Column(name = "videoimg_id")
     private Long id;
 
-    private String file_url;
+    private String filePath;
+
+    private Date createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "video_id")

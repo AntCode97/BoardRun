@@ -1,30 +1,38 @@
-boardrun/yunjun/controller/VideoForm.java
- boardrun.yunjun.controller.VideoForm
+boardrun/yunjun/WebConfig.java
+ boardrun.yunjun.WebConfig
+boardrun/yunjun/service/VideoService.java
+ boardrun.yunjun.service.VideoService
+boardrun/yunjun/service/DetectionService.java
+ boardrun.yunjun.service.DetectionService
 boardrun/yunjun/storage/FileSystemStorageService.java
  boardrun.yunjun.storage.FileSystemStorageService
 boardrun/yunjun/BoardrunApplication.java
  boardrun.yunjun.BoardrunApplication
 boardrun/yunjun/controller/HomeController.java
  boardrun.yunjun.controller.HomeController
-boardrun/yunjun/storage/StorageFileNotFoundException.java
- boardrun.yunjun.storage.StorageFileNotFoundException
+boardrun/yunjun/domain/Video.java
+ boardrun.yunjun.domain.Video
 boardrun/yunjun/ServletInitializer.java
  boardrun.yunjun.ServletInitializer
 boardrun/yunjun/storage/StorageException.java
  boardrun.yunjun.storage.StorageException
 boardrun/yunjun/storage/StorageService.java
  boardrun.yunjun.storage.StorageService
+boardrun/yunjun/service/ThumbnailService.java
+ boardrun.yunjun.service.ThumbnailService
 boardrun/yunjun/storage/StorageProperties.java
  boardrun.yunjun.storage.StorageProperties
-boardrun/yunjun/service/VideoService.java
- boardrun.yunjun.service.VideoService
-boardrun/yunjun/controller/VideoController.java
- boardrun.yunjun.controller.VideoController
+boardrun/yunjun/controller/VideoForm.java
+ boardrun.yunjun.controller.VideoForm
+boardrun/yunjun/repository/VideoImgRepository.java
+ boardrun.yunjun.repository.VideoImgRepository
+boardrun/yunjun/repository/VideoRepository.java
+ boardrun.yunjun.repository.VideoRepository
 boardrun/yunjun/controller/VideoController2.java
  boardrun.yunjun.controller.VideoController2
 boardrun/yunjun/domain/VideoImg.java
  boardrun.yunjun.domain.VideoImg
-boardrun/yunjun/domain/Video.java
- boardrun.yunjun.domain.Video
-boardrun/yunjun/repository/VideoRepository.java
- boardrun.yunjun.repository.VideoRepository
+boardrun/yunjun/storage/StorageFileNotFoundException.java
+ boardrun.yunjun.storage.StorageFileNotFoundException
+boardrun/yunjun/controller/VideoController.java
+ boardrun.yunjun.controller.VideoController

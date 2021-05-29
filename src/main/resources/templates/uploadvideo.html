@@ -67,7 +67,21 @@
             font-size: 23px;
             background-color: #D1E0CF;
         }
-
+        .video {
+    position: relative;
+    padding-bottom: 56.25%;
+    height:0;
+    overflow:hidden;
+}
+    .video video,
+    .video object,
+    .video embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height:100%;
+    }
         /*.filebox label {*/
         /*    display: inline-block;*/
         /*    padding: .5em .75em;*/
@@ -81,6 +95,9 @@
         /*    border-bottom-color: #e2e2e2;*/
         /*    border-radius: .25em;*/
         /*}*/
+    form {
+    display: inline-block;
+    }
 
 
     </style>
@@ -89,32 +106,39 @@
 
 <body>
 <div class="main-box">
-    <a href="main.html">Board Run</a>
+    <a href="/">Board Run</a>
 </div>
-<div class="thumbnail">
+<div class="video"  th:each="video: ${videoFile}">
+    <video controls width="600">
+        <source th:src="${video}" >
+        Vide 없음
+    </video>
+</div>
 
-</div>
-<!--<form role="form" action="/videoList" th:object="${videoForm}" class="bottom" method="post" enctype="multipart/form-data" ...>-->
-<!--    <div >-->
-<!--        <input th:field="*{fileUrl}" class="upload-button"  id="video_file" type="file" name="files" accept="video/*">-->
 <form role="form" action="/uploadvideo" class="bottom" method="post" enctype="multipart/form-data" ...>
-    <div >
-        <input class="upload-button"  id="video_file" type="file" name="file" accept="video/*">
+    <div>
+        <input class="upload-button" id="video_file" type="file" name="file" accept="video/*">
     </div>
     <button type="submit" class="detect-button">
         Upload
     </button>
-    <button class="detect-button">
-        <a href="/videoList"> 다중 탑승 행위 검출 </a>
+
+</form>
+<form role="form" method="get" action="/detection">
+    <button class="detect-button" type="submit">
+        다중 탑승 행위 검출
     </button>
 </form>
-<div>
-    <ul>
-        <li th:each="file : ${files}">
-            <a th:href="${file}" th:text="${file}" />
-        </li>
-    </ul>
-</div>
+<button class="detect-button">
+    <a href="/videoList"> 검출 목록 보기 </a>
+</button>
+<!--<div>-->
+<!--    <ul>-->
+<!--        <li th:each="file : ${files}">-->
+<!--            <a th:href="${file}" th:text="${file}"/>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
 
 <!--<script th:inline="javascript"> $(document).ready(function () {-->
 <!--    var fileTarget = $('.filebox .upload-hidden');-->

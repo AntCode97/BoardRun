@@ -76,82 +76,18 @@
     </div>
 
     <div class="video-first">
-        <div class="one">
-            <div class="one-video">
-
-            </div>
-            <div class="one-name">
-                2021/04/20 14:30
-            </div>
-        </div>
-
-        <div class="two">
-            <div class="two-video">
-
-            </div>
-            <div class="two-name">
-                
-            </div>
-        </div>
-
-        <div class="three">
-
-            <div class="three-video">
-
-            </div>
-            <div class="three-name">
-                
-            </div>
-        </div>
-
-        <div class="four">
-            <div class="four-video">
-
-            </div>
-            <div class="four-name">
-                
+        <div class="one"  th:each="detection: ${detectionList}">
+<!--            <li th:each="file : ${files}">-->
+<!--                <a th:href="${file}" th:text="${file}" />-->
+<!--            </li>-->
+            <img class="one-video" th:src="${detection.getFilePath()}">
+            <div class="one-name" th:text="${detection.getCreatedAt()}">
             </div>
         </div>
     </div>
 
-    <div class="video-second">
-        <div class="five">
-            <div class="five-video">
 
-            </div>
-            <div class="five-name">
 
-            </div>
-        </div>
-
-        <div class="six">
-            <div class="six-video">
-
-            </div>
-            <div class="six-name">
-                
-            </div>
-        </div>
-
-        <div class="seven">
-
-            <div class="seven-video">
-
-            </div>
-            <div class="seven-name">
-                
-            </div>
-        </div>
-
-        <div class="eight">
-            <div class="eight-video">
-
-            </div>
-            <div class="eight-name">
-                
-            </div>
-        </div>
-    </div>
 
 
 </body>
